@@ -1,0 +1,29 @@
+.file-upload{
+  margin-top: 22px;
+
+  &.no-support svg {
+    opacity: 0.2;
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+    margin-top: 40px;
+  }
+
+  .drop {
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px dashed #ccc;
+    border-radius: 6px;
+    text-align: center;
+    padding: 40px;
+    margin-top: 20px;
+
+    .info {
+      color: #999;
+      font-size: 14px;
+      line-height: 26px;
+      font-weight: bold;
+    }
+  }
+}

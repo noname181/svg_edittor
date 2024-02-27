@@ -1,0 +1,46 @@
+.toolbar {
+  width: 64px;
+  line-height: 0;
+  border-right: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(50, 50, 50, 0.25);
+
+
+  button {
+    position: relative;
+    width: 100%;
+    height: 54px;
+    opacity: 0.55;
+    clear: both;
+    border: 0;
+    border-radius: unset;
+
+    img,
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  button:focus {
+    outline: 0;
+  }
+
+  button:hover,
+  button.active {
+    opacity: 1;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    box-shadow: inset 5px 0 10px 0 rgba(50, 50, 50, 0.1);
+  }
+
+  .separator {
+    width: 75%;
+    height: 1px;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    clear: both;
+    background-color: #ddd;
+  }
+}

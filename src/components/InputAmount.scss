@@ -1,0 +1,51 @@
+.button-amount {
+  width: 100%;
+  height: 30px;
+  background-color: #e4e4e4;
+  border-radius: 6px;
+  text-align: center;
+  position: relative;
+
+  &.disabled {
+    background-color: #eee;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  input[type="text"] {
+    float: left;
+    width: 36%;
+    border: 0;
+    margin: 0 auto;
+    padding: 0;
+    background-color: transparent;
+    text-align: center;
+    height: 30px;
+    font-size: 13px;
+  }
+
+   &.disabled input[type="text"] {
+    color: #aaa;
+   }
+
+  div {
+    float: left;
+    width: 32%;
+    height: 30px;
+    line-height: 26px;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 6px;
+    color: #333;
+    border: 2px solid transparent;
+    font-size: 16px;
+  }
+
+  .increase,
+  .decrease {
+    cursor: pointer;
+  }
+
+}

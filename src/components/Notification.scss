@@ -1,0 +1,38 @@
+.notification {
+  z-index: 1000;
+  position: fixed;
+  right: -10px;
+  top: 20%;
+  border-radius: 6px;
+  color: #004085;
+  font-size: 15px;
+  text-align: left;
+  line-height: 22px;
+  font-weight: normal;
+  background-color: #cce5ff;
+  border: 1px solid #78a2b3;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  min-width: 150px;
+  max-width: 300px;
+
+  &.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #7cca8e;
+  }
+
+  &.error {
+    color: #721c24;
+    background-color: #d08f96;
+    border-color: #f5c6cb;
+  }
+
+  &.alert {
+    color: #856404;
+    background-color: #dbc789;
+    border-color: #ffeeba;
+  }
+}

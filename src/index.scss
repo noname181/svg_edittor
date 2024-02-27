@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Cormorant+Garamond:wght@500&family=Dancing+Script:wght@500&family=Indie+Flower&family=Open+Sans&family=Oswald&family=Permanent+Marker&family=Playfair+Display&display=swap');
+
+//--------------------------------------------------------------------
+
+body,
+html,
+#root,
+#app {
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  background-color: #eaeaea;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  line-height: 22px;
+  font-size: 14px;
+  user-select: none;
+  overflow-y: hidden;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+#app {
+  text-align: center;
+  position: relative;
+}
+
+#app, #root {
+  min-height: 100vh;
+  height: 100%;
+}
+
+p {
+  margin-top: 0;
+}
+
+select {
+  appearance: none;
+  color: #333;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #e4e4e4;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 30px;
+  background-image: url('./icons/caret-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 6px;
+  padding-left: 5px;
+  padding-right: 20px;
+  position: relative;
+}
+
+
+//--------------------------------------------------------------------
+
+
+.sbar::-webkit-scrollbar{
+  width: 8px;
+}
+.sbar {
+  scrollbar-width: thin;
+  scrollbar-color: #c9c9c9 #e4e4e4;
+}
+.sbar::-webkit-scrollbar-track{
+  background: #e4e4e4;
+}
+.sbar::-webkit-scrollbar-thumb{
+  background-color: #c9c9c9;
+  border-radius: 3px;
+}
+
+
+//--------------------------------------------------------------------
+
+
+header {
+  z-index: -1;
+
+  .menu {
+
+    button {
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center center;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      border: 2px solid #000;
+      border-radius: 50%;
+      clear: both;
+      opacity: 0.6;
+      margin-left: 20px;
+
+      &.close{
+        background-color: #000;
+
+        svg {
+          fill: #fff;
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+
+      img,
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      &.disabled {
+        opacity: 0.2;
+      }
+
+    }
+  }
+
+  .floating-menu {
+    left: auto;
+    bottom: auto;
+    right: 65px;
+    top: 91px;
+  }
+}
+
+
+//--------------------------------------------------------------------
+
+
+.canvas-holder {
+  z-index: 0;
+}
+
+
+//--------------------------------------------------------------------
+
+
+.toolbar {
+  z-index: 4;
+  position: absolute;
+  left: 0;
+  top: -2px;
+  // height: calc(100% - 91px);
+  // height: 100%;
+  min-height: calc(100% + 2px);
+}
+
+.toolpanel {
+  // position: fixed;
+  position: absolute;
+  z-index: 1;
+  top: 38px;
+  left: -300px;
+  height: calc(100% - 38px);
+  box-shadow: 0 0 2px 0 rgba(50, 50, 50, 0.25);
+
+  &.visible {
+    left: 63px;
+  }
+
+  .minimizer {
+    box-shadow: 1px 0 2px 0 rgba(50, 50, 50, 0.1);
+  }
+
+  button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    text-align: center;
+
+    &:hover {
+      border-color: #555;
+    }
+
+    img,
+    svg {
+      opacity: 0.7;
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+//--------------------------------------------------------------------
+
+
+.bottom-info {
+  font-size: 13px;
+  color: #999;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  line-height: 18px;
+
+  img,
+  svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+    opacity: 0.4;
+  }
+
+  select {
+    width: 70px;
+  }
+}
+
+
+//--------------------------------------------------------------------
+
+
+.chrome-picker {
+  background-color: transparent !important;
+  box-shadow: unset !important;
+  font-family: 'Open Sans' !important;
+
+  .flexbox-fix div:nth-child(2) > div:nth-child(2) {
+    border: 1px solid #eee;
+  }
+}
+
+
+//--------------------------------------------------------------------
+
+
+.tabs {
+  margin-top: 22px;
+
+  .tablist {
+    margin-bottom: 15px;
+  }
+
+  .tablist .button {
+    font-size: 13px;
+
+    &.active {
+      color: #555;
+    }
+  }
+}
+
+
+//--------------------------------------------------------------------

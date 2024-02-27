@@ -1,0 +1,27 @@
+.shapes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-row-gap: 20px;
+  grid-column-gap: 15px;
+  margin-top: 22px;
+
+  .button {
+    cursor: pointer;
+    line-height: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 100%;
+      height: auto;
+      opacity: 0.5;
+      max-height: 36px;
+    }
+
+    &:hover svg {
+      opacity: 1;
+    }
+  }
+}

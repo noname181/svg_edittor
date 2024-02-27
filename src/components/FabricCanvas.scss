@@ -1,0 +1,32 @@
+.canvas-holder {
+  position: fixed;
+  left: 45px;
+  top: 0px;
+  width: calc(100% - 30px);
+  height: calc(100% + 0px);
+  align-content: center;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.canvas-container {
+  margin: 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: #FEFEFE;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHUlEQVQ4jWNgYGAQIYAJglEDhoUBg9+FowbQ2gAARjwKARjtnN8AAAAASUVORK5CYII=');
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  box-sizing: content-box;
+}
+
+.canvas-info {
+  width: 100%;
+  font-size: 13px;
+  color: #999;
+  position: relative;
+  text-align: left;
+  line-height: 18px;
+  margin-top: -42px;
+  text-align: center;
+}

@@ -1,0 +1,40 @@
+.tabs {
+  .tablist {
+    width: 100%;
+    margin-bottom: 10px;
+
+    div {
+      display: inline-block;
+      vertical-align: middle;
+      color: #aaa;
+    }
+
+    .button {
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+
+      &.active {
+        color: #333;
+      }
+    }
+
+    .sep {
+      margin-left: 10px;
+      margin-right: 10px;
+      font-size: 22px;
+      font-weight: normal;
+      font-style: italic;
+      color: #ddd;
+      margin-top: -4px;
+    }
+  }
+
+  .tab {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}
