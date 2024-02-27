@@ -128,9 +128,9 @@ const App = () => {
                     var text = new fabric.Textbox(obj.text, obj.toObject());
                     text.set({
                       text: value,
-                      type: "i-text",
+                      type: "textbox",
                     });
-                    text.set({ left: obj?.left - (obj?.width/2), top: obj?.top });
+                    text.set({ left: obj?.left - (obj?.width / 2), top: obj?.top - (obj?.height / 2) - 8 });
                     canvas.add(text).renderAll();
                   } else {
                     obj.set({ left: obj?.left, top: obj?.top });
@@ -568,17 +568,29 @@ const App = () => {
           <UploadSettings canvas={canvas} />
         )}
       </ToolPanel>
+      <div
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          top: 0
+        }}
+      >
+        <FabricCanvas
+          canvas={canvas}
+          setCanvas={setCanvas}
+          selectionInfo={selectionInfo}
+          setSelectionInfo={setSelectionInfo}
+          setActiveSelection={setActiveSelection}
+          setIsTextEditing={setIsTextEditing}
+          setHistory={setHistory}
+          tnSVG={tnSVG}
+        />
+      </div>
 
-      <FabricCanvas
-        canvas={canvas}
-        setCanvas={setCanvas}
-        selectionInfo={selectionInfo}
-        setSelectionInfo={setSelectionInfo}
-        setActiveSelection={setActiveSelection}
-        setIsTextEditing={setIsTextEditing}
-        setHistory={setHistory}
-        tnSVG={tnSVG}
-      />
 
       <div className="bottom-info">
         <IconZoom />

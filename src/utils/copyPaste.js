@@ -1,7 +1,7 @@
 /*
  * Copy paste for FabricJS.
  */
-
+import reduceImageSize from "./reduceImageSize"
 
 const copyPaste = (canvas, fabric) => {
 
@@ -53,7 +53,7 @@ const copyPaste = (canvas, fabric) => {
       str = str.split('base64,').pop()
       window.atob(str)
       return true
-    } catch(e) {
+    } catch (e) {
       return false
     }
   }
@@ -63,41 +63,32 @@ const copyPaste = (canvas, fabric) => {
   // paste
   document.addEventListener('paste', (e) => {
     let pasteTextData = e.clipboardData.getData('text')
-
+    console.log(e)
     // check if base64 image
-    if (pasteTextData && isBase64String(pasteTextData)){
+    if (pasteTextData && isBase64String(pasteTextData)) {
       fabric.Image.fromURL(pasteTextData, (img) => {
-          img.set({left: 0, top: 0})
-          img.scaleToHeight(100)
-          img.scaleToWidth(100)
-          canvas.add(img)
-          canvas.setActiveObject(img)
-          canvas.trigger('object:modified')
-        })
+        img.set({ left: 0, top: 0 })
+        img.scaleToHeight(100)
+        img.scaleToWidth(100)
+        canvas.add(img)
+        canvas.setActiveObject(img)
+        canvas.trigger('object:modified')
+      })
 
       return
     }
 
 
     // check if there's an image in clipboard items
-    if (e.clipboardData.items.length > 0){
+    if (e.clipboardData.items.length > 0) {
       for (let i = 0; i < e.clipboardData.items.length; i++) {
+
         if (e.clipboardData.items[i].type.indexOf('image') === 0) {
-          let blob = e.clipboardData.items[i].getAsFile()
-          if (blob !== null) {
-            let reader = new FileReader()
-            reader.onload = (f) => {
-              fabric.Image.fromURL(f.target.result, (img) => {
-                img.set({left: 0, top: 0})
-                img.scaleToHeight(100)
-                img.scaleToWidth(100)
-                canvas.add(img)
-                canvas.setActiveObject(img)
-                canvas.trigger('object:modified')
-              })
-            }
-            reader.readAsDataURL(blob)
-          }
+          let blob = e.clipboardData.items[i].getAsFile();
+
+
+          reduceImageSize(canvas, fabric, blob);
+
         }
       }
     }
@@ -107,17 +98,17 @@ const copyPaste = (canvas, fabric) => {
     let validTypes = ['rect', 'circle', 'line', 'path', 'polygon', 'polyline', 'textbox', 'group']
     if (isJSONObjectString(pasteTextData)) {
       let obj = JSON.parse(pasteTextData)
-      if (! validTypes.includes(obj.type)) return
+      if (!validTypes.includes(obj.type)) return
 
       // insert and select
-      fabric.util.enlivenObjects([obj], function(objects) {
-        objects.forEach(function(o) {
+      fabric.util.enlivenObjects([obj], function (objects) {
+        objects.forEach(function (o) {
           // if pasting a textbox, change its unique ID
           if (o.type === 'textbox') {
             o.set({ uId: Date.now() + Math.random() })
           }
-
-          o.set({ left: 0, top: 0})
+          o.set({ left: canvas.width - o.width, top: 0 })
+          o.set({ left: 0, top: 0 })
           canvas.add(o)
           o.setCoords()
           canvas.setActiveObject(o)

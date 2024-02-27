@@ -102,10 +102,10 @@ const demoContent = (canvas, fabric) => {
           value =
             obj["text-transform"] == "uppercase" ? value.toUpperCase() : value;
 
-          var text = new fabric.IText(obj.text, obj.toObject());
+          var text = new fabric.Textbox(obj.text, obj.toObject());
           text.set({
             text: value,
-            type: "i-text",
+            type: "textbox",
           });
 
           var left = 0;
@@ -134,7 +134,7 @@ const demoContent = (canvas, fabric) => {
           canvas.add(obj).renderAll();
         }
 
-        
+
       });
     }
   );

@@ -176,7 +176,6 @@ const FabricCanvas = (props) => {
 
     // delete object on del key
     document.addEventListener("keydown", (e) => {
-      console.log(e)
       const key = e.which || e.keyCode;
       if (
         key === 46 &&
@@ -205,7 +204,7 @@ const FabricCanvas = (props) => {
     fabricCanvas.on("text:editing:exited", () => props.setIsTextEditing(false));
 
     // add demo objects
-    //demoContent(fabricCanvas, fabric)
+    // demoContent(fabricCanvas, fabric)
 
     // save history's first state on startup
     setTimeout(() => {

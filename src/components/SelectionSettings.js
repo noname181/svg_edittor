@@ -27,7 +27,6 @@ const SelectionSettings = ({ canvas, activeSelection, isTextEditing }) => {
         <SelectionColorSettings canvas={canvas} activeSelection={activeSelection} />
       }
 
-
       { activeSelection.type === 'textbox' &&
         <>
           <p className="subtitle">{__('Font style')}</p>

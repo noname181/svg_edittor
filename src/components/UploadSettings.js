@@ -4,7 +4,7 @@ import './UploadSettings.scss';
 import { fabric } from 'fabric';
 
 import __ from './../utils/translation';
-
+import reduceImageSize from '../utils/reduceImageSize';
 import { ReactComponent as IconSadSmiley } from './../icons/sad-smiley.svg';
 
 
@@ -41,6 +41,7 @@ const UploadSettings = ({ canvas }) => {
 
       // handle svg
       if (file.type === 'image/svg+xml') {
+
         reader.onload = (f) => {
           fabric.loadSVGFromString(f.target.result, (objects, options) => {
             let obj = fabric.util.groupSVGElements(objects, options)
@@ -54,21 +55,8 @@ const UploadSettings = ({ canvas }) => {
         reader.readAsText(file)
         continue
       }
+      reduceImageSize(canvas, fabric, file);
 
-      // handle image, read file, add to canvas
-      reader.onload = (f) => {
-        fabric.Image.fromURL(f.target.result, (img) => {
-          img.set({left: canvas.getWidth() - 300, top: 0})
-          img.scaleToHeight(300)
-          img.scaleToWidth(300)
-          canvas.add(img)
-
-          canvas.renderAll()
-          canvas.trigger('object:modified')
-        })
-      }
-
-      reader.readAsDataURL(file)
     }
   }
 
