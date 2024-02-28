@@ -119,18 +119,31 @@ const App = () => {
                         value += "\n";
                       }
                     });
-
+                    console.log(childrens);
+                    console.log(element);
+                    console.log(obj);
                     value =
                       obj["text-transform"] == "uppercase"
                         ? value.toUpperCase()
                         : value;
-
+                    var _textAlign = obj.get("textAnchor")
+                      ? obj.get("textAnchor")
+                      : "left";
                     var text = new fabric.Textbox(obj.text, obj.toObject());
                     text.set({
                       text: value,
                       type: "textbox",
                     });
-                    text.set({ left: obj?.left - (obj?.width / 2), top: obj?.top - (obj?.height / 2) - 8 });
+
+                    text.set({
+                      left:
+                        parseFloat(obj.left) +
+                        parseFloat(element.firstChild.getAttribute("x")),
+                      top:
+                        parseFloat(obj.top) +
+                        parseFloat(element.firstChild.getAttribute("y")),
+                      textAlign: _textAlign,
+                    });
                     canvas.add(text).renderAll();
                   } else {
                     obj.set({ left: obj?.left, top: obj?.top });
@@ -491,7 +504,7 @@ const App = () => {
                 }
               )
               .then((res) => {
-                alert('Saved!');
+                alert("Saved!");
                 console.log(res);
               });
             // saveInBrowser.save("canvasEditor", canvas.toJSON());
@@ -570,13 +583,13 @@ const App = () => {
       </ToolPanel>
       <div
         style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          top: 0
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          top: 0,
         }}
       >
         <FabricCanvas
@@ -590,7 +603,6 @@ const App = () => {
           tnSVG={tnSVG}
         />
       </div>
-
 
       <div className="bottom-info">
         <IconZoom />

@@ -228,6 +228,10 @@ const FabricCanvas = (props) => {
       );
     }
 
+    //Default setting for free drawing
+    fabricCanvas.freeDrawingBrush.width = 3;
+    fabricCanvas.freeDrawingBrush.color = "#FF0000";
+
     // add to state
     props.setCanvas(fabricCanvas);
   }, [props]);

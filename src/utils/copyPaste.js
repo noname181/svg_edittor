@@ -67,9 +67,9 @@ const copyPaste = (canvas, fabric) => {
     // check if base64 image
     if (pasteTextData && isBase64String(pasteTextData)) {
       fabric.Image.fromURL(pasteTextData, (img) => {
-        img.set({ left: 0, top: 0 })
-        img.scaleToHeight(100)
-        img.scaleToWidth(100)
+        img.set({ left: canvas.width - 200, top: 0 })
+        img.scaleToHeight(200)
+        img.scaleToWidth(200)
         canvas.add(img)
         canvas.setActiveObject(img)
         canvas.trigger('object:modified')

@@ -13,14 +13,14 @@ import { ChromePicker } from 'react-color';
 const DrawSettings = ({ canvas }) => {
 
   const [drawSettings, setDrawSettings] = useState({
-    width: 1,
+    width: 3,
     style: 'pencil',
-    color: 'rgba(0,0,0,1)'
+    color: '#FF0000'
   })
 
 
   const handleBrushWidthChange = (action, amount) => {
-    let width = 1
+    let width = 3
 
     if (action === 'decrease') {
       width = drawSettings.width

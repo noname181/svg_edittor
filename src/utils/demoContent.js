@@ -98,7 +98,10 @@ const demoContent = (canvas, fabric) => {
               value += "\n";
             }
           });
-
+          console.log(childrens);
+          console.log(obj.left + element.firstChild.getAttribute('x'));
+          console.log(element.firstChild.getAttribute('y'));
+          console.log(obj);
           value =
             obj["text-transform"] == "uppercase" ? value.toUpperCase() : value;
 
@@ -125,7 +128,8 @@ const demoContent = (canvas, fabric) => {
           }
 
           text.set({
-            left: left,
+            left: parseFloat(obj.left) + parseFloat(element.firstChild.getAttribute('x')),
+            top: parseFloat(obj.top) + parseFloat(element.firstChild.getAttribute('y')),
             textAlign: _textAlign,
           });
           canvas.add(text).renderAll();

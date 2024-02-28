@@ -52,15 +52,16 @@ import { ReactComponent as Shape35 } from './../shapes/35-chat-thought.svg';
 const Shapes = ({ canvas }) => {
 
   const handleShapeAdd = (e) => {
+    console.log(e.currentTarget)
     fabric.loadSVGFromString(
       e.currentTarget.children[0].outerHTML,
       (objects, options) => {
         var obj = fabric.util.groupSVGElements(objects, options)
         obj.strokeUniform = true
         obj.strokeLineJoin = 'miter'
-        obj.scaleToWidth(100)
-        obj.scaleToHeight(100)
-        obj.set({ left: canvas.getWidth() - 100, top: 0 })
+        obj.scaleToWidth(200)
+        obj.scaleToHeight(200)
+        obj.set({ left: canvas.getWidth() - 200, top: 0 })
         canvas.add(obj).renderAll()
         canvas.trigger('object:modified')
       }
