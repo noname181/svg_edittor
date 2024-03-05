@@ -99,59 +99,88 @@ const App = () => {
           if (res?.data?.tn_svg && canvas) {
             canvas.clear();
             canvas.backgroundColor = "#ffffff";
-            console.log(`222https://pms.riansoft.net${res?.data?.tn_svg}`);
+            let width =
+              document.getElementsByClassName("canvas-holder")[0].offsetWidth - 17;
+            let height =
+              document.getElementsByClassName("canvas-holder")[0].offsetHeight - 8;
             fabric.loadSVGFromURL(
               `https://pms.riansoft.net${res?.data?.tn_svg}`,
-              function (objects, options, elements) {
-                objects.forEach((obj, index) => {
-                  if (obj.text) {
-                    var element = elements[index];
-                    var childrens = [].slice.call(element.childNodes);
-                    var value = "";
-                    childrens.forEach(function (el, index, array) {
-                      if (el.nodeName == "tspan") {
-                        value += el.childNodes[0].nodeValue;
-                      } else if (el.nodeName == "#text") {
-                        value += el.nodeValue;
-                      }
+              function (_objects, _options, _elements) { 
+                // let group = fabric.util.groupSVGElements(_objects, _options);
+                // let _width = group.width;
+                // let _height = group.height;
+                // const fabricCanvas = new fabric.Canvas("c").setDimensions({
+                //   width: _width,
+                //   height: _height,
+                // });
+                // fabricCanvas.originalW = fabricCanvas.width;
+                // fabricCanvas.originalH = fabricCanvas.height;
+                // fabricCanvas.backgroundColor = "#ffffff";
 
-                      if (index < childrens.length - 1) {
-                        value += "\n";
+                fabric.loadSVGFromURL(
+                  `https://pms.riansoft.net${res?.data?.tn_svg}`,
+                  function (objects, options, elements) {
+                    
+                    objects.forEach((obj, index) => {
+                      if (obj.text) {
+                        var element = elements[index];
+                        var childrens = [].slice.call(element.childNodes);
+                        var value = "";
+                        childrens.forEach(function (el, index, array) {
+                          if (el.nodeName == "tspan") {
+                            value += el.childNodes[0].nodeValue;
+                          } else if (el.nodeName == "#text") {
+                            value += el.nodeValue;
+                          }
+    
+                          if (index < childrens.length - 1) {
+                            value += "\n";
+                          }
+                        });
+                        value =
+                          obj["text-transform"] == "uppercase"
+                            ? value.toUpperCase()
+                            : value;
+                        var _textAlign = obj.get("textAnchor")
+                          ? obj.get("textAnchor")
+                          : "left";
+                        var text = new fabric.Textbox(obj.text, obj.toObject());
+                        text.set({
+                          text: value,
+                          type: "textbox",
+                        });
+    
+                        text.set({
+                          left:
+                            parseFloat(obj.left) +
+                            parseFloat(element.firstChild.getAttribute("x")),
+                          top:
+                            parseFloat(obj.top) +
+                            parseFloat(element.firstChild.getAttribute("y")),
+                          textAlign: _textAlign,
+                        });
+                        canvas.add(text).renderAll();
+                      } else {
+                        obj.set({ left: obj?.left, top: obj?.top });
+                        canvas.add(obj).renderAll();
                       }
                     });
-                    console.log(childrens);
-                    console.log(element);
-                    console.log(obj);
-                    value =
-                      obj["text-transform"] == "uppercase"
-                        ? value.toUpperCase()
-                        : value;
-                    var _textAlign = obj.get("textAnchor")
-                      ? obj.get("textAnchor")
-                      : "left";
-                    var text = new fabric.Textbox(obj.text, obj.toObject());
-                    text.set({
-                      text: value,
-                      type: "textbox",
-                    });
-
-                    text.set({
-                      left:
-                        parseFloat(obj.left) +
-                        parseFloat(element.firstChild.getAttribute("x")),
-                      top:
-                        parseFloat(obj.top) +
-                        parseFloat(element.firstChild.getAttribute("y")),
-                      textAlign: _textAlign,
-                    });
-                    canvas.add(text).renderAll();
-                  } else {
-                    obj.set({ left: obj?.left, top: obj?.top });
-                    canvas.add(obj).renderAll();
+                    
+                    // let scaleRatio = Math.min(fabricCanvas.getWidth()/width, fabricCanvas.getHeight()/height);
+                    // fabricCanvas.setDimensions({ width: fabricCanvas.getWidth() * scaleRatio, height: fabricCanvas.getHeight() * scaleRatio });
+                    // fabricCanvas.setZoom(scaleRatio)
+                    // canvas.setDimensions({ width: fabricCanvas.getWidth() * scaleRatio, height: fabricCanvas.getHeight() * scaleRatio });
+                    // console.log('width canvas: ' + fabricCanvas.getWidth())
+                    // console.log('height canvas: ' + fabricCanvas.getHeight())
+                    // console.log('width: ' + width)
+                    // console.log('height: ' + height)
+                    // console.log('scaleRatio: ' + scaleRatio)
+                    // canvas = fabricCanvas;
                   }
-                });
-              }
-            );
+                 
+                );
+            })
+          
           } else {
             canvas.clear();
             canvas.backgroundColor = "#ffffff";
@@ -516,13 +545,13 @@ const App = () => {
         >
           <IconTick />
         </Button>
-        <Button
+        {/* <Button
           title={__("Download as..")}
           className="download"
           handleClick={() => setDownloadMenuVisible(!downloadMenuVisible)}
         >
           <IconDownload />
-        </Button>
+        </Button> */}
         <Button
           title={__("Close and open new")}
           handleClick={() => {

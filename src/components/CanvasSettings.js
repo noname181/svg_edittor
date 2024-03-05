@@ -158,7 +158,7 @@ const CanvasSettings = ({ canvas }) => {
   return (
     <>
       <p className="title">{__('CANVAS SETTINGS')}</p>
-      <p className="subtitle">{__('Canvas size')}</p>
+      {/* <p className="subtitle">{__('Canvas size')}</p>
       <div className="setting">
         <div className="label">{__('Width')}</div><div className="function input-with-unit">
           <input type="text" value={canvasSettings.width}
@@ -180,10 +180,10 @@ const CanvasSettings = ({ canvas }) => {
           <input type="checkbox" value="true" defaultChecked={canvasSettings.keepAspectRatio}
             onChange={(e) => setCanvasSettings({...canvasSettings, keepAspectRatio: e.target.checked }) } />
         </div>
-      </div>
-      <div className="setting">
+      </div> */}
+      {/* <div className="setting">
         <button onClick={() => fitToContent()}>{__('Fit to content')}</button>
-      </div>
+      </div> */}
 
       <Tabs defaultTab={canvas.backgroundColor.type ? 'gradient' : 'color'}>
         <Tab title={__('Color fill')} name="color">

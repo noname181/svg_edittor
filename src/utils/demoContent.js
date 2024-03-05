@@ -82,6 +82,8 @@ const demoContent = (canvas, fabric) => {
       console.log(objects);
       console.log(elements);
       alert(2);
+      let group = fabric.util.groupSVGElements(objects, options);
+      console.log(group.width);
       objects.forEach((obj, index) => {
         if (obj.text) {
           var element = elements[index];
