@@ -105,11 +105,13 @@ const App = () => {
               document.getElementsByClassName("canvas-holder")[0].offsetHeight - 8;
             fabric.loadSVGFromURL(
               `https://pms.riansoft.net${res?.data?.tn_svg}`,
-              function (_objects, _options, _elements) { 
+              function (_objects, _options, _elements) {
                 let group = fabric.util.groupSVGElements(_objects, _options);
                 let _width = group.width;
                 let _height = group.height;
-                canvas.setDimensions({ width: _width, height: _height });
+                if(_width > width || _height > height){
+                  canvas.setDimensions({ width: _width, height: _height });
+                }
                 // const fabricCanvas = new fabric.Canvas("c").setDimensions({
                 //   width: _width,
                 //   height: _height,
@@ -121,7 +123,7 @@ const App = () => {
                 fabric.loadSVGFromURL(
                   `https://pms.riansoft.net${res?.data?.tn_svg}`,
                   function (objects, options, elements) {
-                    
+
                     objects.forEach((obj, index) => {
                       if (obj.text) {
                         var element = elements[index];
@@ -133,7 +135,7 @@ const App = () => {
                           } else if (el.nodeName == "#text") {
                             value += el.nodeValue;
                           }
-    
+
                           if (index < childrens.length - 1) {
                             value += "\n";
                           }
@@ -150,7 +152,7 @@ const App = () => {
                           text: value,
                           type: "textbox",
                         });
-    
+
                         text.set({
                           left:
                             parseFloat(obj.left) +
@@ -166,7 +168,7 @@ const App = () => {
                         canvas.add(obj).renderAll();
                       }
                     });
-                    
+
                     // let scaleRatio = Math.min(fabricCanvas.getWidth()/width, fabricCanvas.getHeight()/height);
                     // fabricCanvas.setDimensions({ width: fabricCanvas.getWidth() * scaleRatio, height: fabricCanvas.getHeight() * scaleRatio });
                     // fabricCanvas.setZoom(scaleRatio)
@@ -178,10 +180,10 @@ const App = () => {
                     // console.log('scaleRatio: ' + scaleRatio)
                     // canvas = fabricCanvas;
                   }
-                 
+
                 );
             })
-          
+
           } else {
             canvas.clear();
             canvas.backgroundColor = "#ffffff";
@@ -514,7 +516,31 @@ const App = () => {
           <IconRedo />
         </Button>
         <div className="separator"></div>
+
+        {/* <Button
+          title={__("Download as..")}
+          className="download"
+          handleClick={() => setDownloadMenuVisible(!downloadMenuVisible)}
+        >
+          <IconDownload />
+        </Button> */}
         <Button
+          title={__("Close and open new")}
+          handleClick={() => {
+            if (
+              window.confirm(__("This will clear the canvas! Are you sure?"))
+            ) {
+              setHistory({ index: null, states: [] });
+              canvas.clear();
+              saveInBrowser.remove("canvasEditor");
+            }
+          }}
+          className="close"
+        >
+          <IconClose />
+        </Button>
+        <Button
+          style={{backgroundColor: 'rgb(63, 87, 167)', opacity: '0.9'}}
           title={__("Save")}
           handleClick={() => {
             var formData = new FormData();
@@ -544,38 +570,16 @@ const App = () => {
             // });
           }}
         >
-          <IconTick />
+          <IconTick  />
         </Button>
-        {/* <Button
-          title={__("Download as..")}
-          className="download"
-          handleClick={() => setDownloadMenuVisible(!downloadMenuVisible)}
-        >
-          <IconDownload />
-        </Button> */}
-        <Button
-          title={__("Close and open new")}
-          handleClick={() => {
-            if (
-              window.confirm(__("This will clear the canvas! Are you sure?"))
-            ) {
-              setHistory({ index: null, states: [] });
-              canvas.clear();
-              saveInBrowser.remove("canvasEditor");
-            }
-          }}
-          className="close"
-        >
-          <IconClose />
-        </Button>
-        <div className="separator"></div>
+        {/* <div className="separator"></div>
         <Button
           name="background"
           title={__("Canvas options")}
           handleClick={() => setActiveTool("background")}
         >
           <IconGear />
-        </Button>
+        </Button> */}
       </Toolbar>
 
       <ToolPanel
