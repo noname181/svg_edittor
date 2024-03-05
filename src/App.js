@@ -106,9 +106,10 @@ const App = () => {
             fabric.loadSVGFromURL(
               `https://pms.riansoft.net${res?.data?.tn_svg}`,
               function (_objects, _options, _elements) { 
-                // let group = fabric.util.groupSVGElements(_objects, _options);
-                // let _width = group.width;
-                // let _height = group.height;
+                let group = fabric.util.groupSVGElements(_objects, _options);
+                let _width = group.width;
+                let _height = group.height;
+                canvas.setDimensions({ width: _width, height: _height });
                 // const fabricCanvas = new fabric.Canvas("c").setDimensions({
                 //   width: _width,
                 //   height: _height,
