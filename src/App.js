@@ -560,7 +560,10 @@ const App = () => {
                 }
               )
               .then((res) => {
-                alert("Saved!");
+                // alert("Saved!");
+                window.parent.postMessage({
+                  call: 'onSave'
+                }, "*");
                 console.log(res);
               });
             // saveInBrowser.save("canvasEditor", canvas.toJSON());
