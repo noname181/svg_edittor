@@ -63,11 +63,11 @@ const copyPaste = (canvas, fabric) => {
   // paste
   document.addEventListener('paste', (e) => {
     let pasteTextData = e.clipboardData.getData('text')
-    console.log(e)
+    
     // check if base64 image
     if (pasteTextData && isBase64String(pasteTextData)) {
       fabric.Image.fromURL(pasteTextData, (img) => {
-        img.set({ left: canvas.width - 200, top: 0 })
+        img.set({ left: canvas.width/2 - 200, top: canvas.height/2 - 200 })
         img.scaleToHeight(200)
         img.scaleToWidth(200)
         canvas.add(img)

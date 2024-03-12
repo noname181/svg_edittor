@@ -23,9 +23,9 @@ const reduceImageSize = (canvas, fabric, file) => {
         let reader = new FileReader()
         reader.onload = (f) => {
           fabric.Image.fromURL(f.target.result, (img) => {
-            img.set({ left: canvas.width - 200, top: 0 })
-            img.scaleToHeight(200)
-            img.scaleToWidth(200)
+            img.set({ left: canvas.width/2 - 250, top: canvas.height/2 - 250 })
+            img.scaleToHeight(500)
+            img.scaleToWidth(500)
             canvas.add(img)
             canvas.setActiveObject(img)
             canvas.trigger('object:modified')

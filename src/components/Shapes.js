@@ -61,7 +61,7 @@ const Shapes = ({ canvas }) => {
         obj.strokeLineJoin = 'miter'
         obj.scaleToWidth(200)
         obj.scaleToHeight(200)
-        obj.set({ left: canvas.getWidth() - 200, top: 0 })
+        obj.set({ left: canvas.getWidth()/2 - 100, top: canvas.getHeight()/2 - 100 })
         canvas.add(obj).renderAll()
         canvas.trigger('object:modified')
       }
