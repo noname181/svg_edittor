@@ -18,7 +18,7 @@ import { ReactComponent as IconTextSup } from './../icons/text-sup.svg';
 const SelectionTextSettings = ({ canvas, activeSelection, isTextEditing }) => {
 
   const [fontFamily, setFontFamily] = useState()
-  const [fontSize, setFontSize] = useState(16)
+  const [fontSize, setFontSize] = useState(25)
   const [lineHeight, setLineHeight] = useState(20)
   const [charSpacing, setCharSpacing] = useState(0)
   const [textAlign, setTextAlign] = useState('left')

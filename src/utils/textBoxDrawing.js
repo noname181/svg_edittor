@@ -60,8 +60,8 @@ const textBoxDrawing = (fabricCanvas, fabric) => {
     let textbox = new fabric.Textbox(__('Your text goes here...'), {
       left: textboxRect.left,
       top: textboxRect.top,
-      width: textboxRect.width < 80 ? 80 : textboxRect.width,
-      fontSize: 18,
+      width: textboxRect.width < 300 ? 300 : textboxRect.width,
+      fontSize: 28,
       fontFamily: "'Open Sans', sans-serif",
       uId: Date.now() + Math.random()
     });
