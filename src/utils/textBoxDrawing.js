@@ -57,7 +57,7 @@ const textBoxDrawing = (fabricCanvas, fabric) => {
     isDrawingText = false;
 
     // get final rect coords and replace it with textbox
-    let textbox = new fabric.Textbox(__('Your text goes here...'), {
+    let textbox = new fabric.Textbox(__(''), {
       left: textboxRect.left,
       top: textboxRect.top,
       width: textboxRect.width < 300 ? 300 : textboxRect.width,
