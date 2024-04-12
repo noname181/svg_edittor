@@ -524,7 +524,7 @@ const App = () => {
         >
           <IconDownload />
         </Button> */}
-        <Button
+        {/*<Button
           title={__("Close and open new")}
           handleClick={() => {
             if (
@@ -538,7 +538,7 @@ const App = () => {
           className="close"
         >
           <IconClose />
-        </Button>
+        </Button> */}
         <Button
           style={{backgroundColor: 'rgb(63, 87, 167)', opacity: '0.9'}}
           title={__("Save")}
