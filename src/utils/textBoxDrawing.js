@@ -63,7 +63,8 @@ const textBoxDrawing = (fabricCanvas, fabric) => {
       width: textboxRect.width < 300 ? 300 : textboxRect.width,
       fontSize: 28,
       fontFamily: "'Open Sans', sans-serif",
-      uId: Date.now() + Math.random()
+      uId: Date.now() + Math.random(),
+      splitByGrapheme: true,
     });
     fabricCanvas.remove(textboxRect);
     fabricCanvas.add(textbox).setActiveObject(textbox);
