@@ -45,7 +45,7 @@ const UploadSettings = ({ canvas }) => {
         reader.onload = (f) => {
           fabric.loadSVGFromString(f.target.result, (objects, options) => {
             let obj = fabric.util.groupSVGElements(objects, options)
-            obj.set({left: 0, top: 0}).setCoords()
+            obj.set({left: 0, top: 0, width: 100}).setCoords()
             canvas.add(obj)
 
             canvas.renderAll()

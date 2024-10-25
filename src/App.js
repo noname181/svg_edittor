@@ -36,6 +36,7 @@ import {
 } from "./utils/zoom";
 
 import logo from "./images/logo.png";
+import { ReactComponent as IconGroup } from "./icons/group.svg";
 import { ReactComponent as IconGear } from "./icons/gear.svg";
 import { ReactComponent as IconUndo } from "./icons/undo.svg";
 import { ReactComponent as IconRedo } from "./icons/redo.svg";
@@ -59,7 +60,7 @@ const App = () => {
     seconds: null,
   });
   const [downloadMenuVisible, setDownloadMenuVisible] = useState(false);
-  const [activeTool, setActiveTool] = useState("select");
+  const [activeTool, setActiveTool] = useState("shapes");
 
   const [canvas, setCanvas] = useState();
   const [loadSavedCanvas, setLoadSavedCanvas] = useState(true);
@@ -81,6 +82,11 @@ const App = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    console.log("activeSelection: " + activeSelection?.type);
+    console.log("activeTool: " + activeTool);
+  }, [activeSelection, activeTool]);
 
   useEffect(() => {
     if (tnId) {
@@ -287,6 +293,7 @@ const App = () => {
     // select tool (v)
     const keyV = (e) => {
       const key = e.which || e.keyCode;
+
       if (
         key === 86 &&
         document.querySelectorAll("textarea:focus, input:focus").length === 0
@@ -295,7 +302,12 @@ const App = () => {
       }
     };
     document.addEventListener("keydown", keyV);
-
+    document.addEventListener("click", (e) => {
+      if (e.target.className == "canvas-holder") {
+        setActiveSelection(null);
+        canvas.discardActiveObject().requestRenderAll();
+      }
+    });
     // undo/redo (ctrl z/y)
     const ctrZY = (e) => {
       const key = e.which || e.keyCode;
@@ -461,21 +473,21 @@ const App = () => {
       </Header>
 
       <Toolbar activeTool={activeTool}>
-        <Button
+        {/* <Button
           name="select"
           title={__("Select/move object (V)")}
           handleClick={() => setActiveTool("select")}
         >
           <IconCursor />
-        </Button>
+        </Button> */}
         <Button
           name="shapes"
           title={__("Shapes")}
           handleClick={() => setActiveTool("shapes")}
         >
-          <IconShape />
+          <IconGroup />
         </Button>
-        <Button
+        {/* <Button
           name="line"
           title={__("Line")}
           handleClick={() => setActiveTool("line")}
@@ -495,11 +507,13 @@ const App = () => {
           handleClick={() => setActiveTool("draw")}
         >
           <IconBrush />
-        </Button>
+        </Button> */}
         <Button
           name="textbox"
           title={__("Text box")}
-          handleClick={() => setActiveTool("textbox")}
+          handleClick={() => {
+            setActiveTool("textbox");
+          }}
         >
           <IconText />
         </Button>
@@ -609,11 +623,12 @@ const App = () => {
 
       <ToolPanel
         visible={
-          activeSelection ||
-          (activeTool !== "select" &&
-            activeTool !== "line" &&
-            activeTool !== "path" &&
-            activeTool !== "textbox")
+          // activeSelection ||
+          // (activeTool !== "select" &&
+          //   activeTool !== "line" &&
+          //   activeTool !== "path" &&
+          //   activeTool !== "textbox")
+          true
         }
       >
         {activeSelection && (
@@ -632,9 +647,8 @@ const App = () => {
           <DrawSettings canvas={canvas} />
         )}
 
-        {activeTool === "shapes" && !activeSelection && (
-          <Shapes canvas={canvas} />
-        )}
+        {(activeTool === "shapes" || activeTool === "select") &&
+          !activeSelection && <Shapes canvas={canvas} setZoom={setZoom} />}
 
         {activeTool === "upload" && !activeSelection && (
           <UploadSettings canvas={canvas} />

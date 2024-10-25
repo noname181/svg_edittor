@@ -157,9 +157,9 @@ header {
   // position: fixed;
   position: absolute;
   z-index: 1;
-  top: 38px;
+  top: 0;
   left: -300px;
-  height: calc(100% - 38px);
+  height: calc(100% - 0px);
   box-shadow: 0 0 2px 0 rgba(50, 50, 50, 0.25);
 
   &.visible {

@@ -1,83 +1,113 @@
-import React from 'react';
-import './Shapes.scss';
+import React from "react";
+import "./Shapes.scss";
 
-import { fabric } from 'fabric';
+import { fabric } from "fabric";
 
-import __ from './../utils/translation';
+import __ from "./../utils/translation";
 
-import { ReactComponent as Shape01 } from './../shapes/01-rectangle.svg';
-import { ReactComponent as Shape02 } from './../shapes/02-diamond.svg';
-import { ReactComponent as Shape03 } from './../shapes/03-rectangle-dist.svg';
-import { ReactComponent as Shape04 } from './../shapes/04-trapeze.svg';
-import { ReactComponent as Shape05 } from './../shapes/05-frame.svg';
+import { ReactComponent as Shape01 } from "./../shapes/01-rectangle.svg";
+import { ReactComponent as Shape02 } from "./../shapes/02-diamond.svg";
+import { ReactComponent as Shape03 } from "./../shapes/03-rectangle-dist.svg";
+import { ReactComponent as Shape04 } from "./../shapes/04-trapeze.svg";
+import { ReactComponent as Shape05 } from "./../shapes/05-frame.svg";
 
-import { ReactComponent as Shape06 } from './../shapes/06-5-angle.svg';
-import { ReactComponent as Shape07 } from './../shapes/07-6-angle.svg';
-import { ReactComponent as Shape08 } from './../shapes/08-8-angle.svg';
-import { ReactComponent as Shape09 } from './../shapes/09-5-angle-half.svg';
-import { ReactComponent as Shape10 } from './../shapes/10-6-angle-half.svg';
+import { ReactComponent as Shape06 } from "./../shapes/06-5-angle.svg";
+import { ReactComponent as Shape07 } from "./../shapes/07-6-angle.svg";
+import { ReactComponent as Shape08 } from "./../shapes/08-8-angle.svg";
+import { ReactComponent as Shape09 } from "./../shapes/09-5-angle-half.svg";
+import { ReactComponent as Shape10 } from "./../shapes/10-6-angle-half.svg";
 
-import { ReactComponent as Shape11 } from './../shapes/11-triangle-even.svg';
-import { ReactComponent as Shape12 } from './../shapes/12-triangle-odd.svg';
-import { ReactComponent as Shape13 } from './../shapes/13-triangle-frame-even.svg';
-import { ReactComponent as Shape14 } from './../shapes/14-triangle-frame-odd.svg';
-import { ReactComponent as Shape15 } from './../shapes/15-circle.svg';
+import { ReactComponent as Shape11 } from "./../shapes/11-triangle-even.svg";
+import { ReactComponent as Shape12 } from "./../shapes/12-triangle-odd.svg";
+import { ReactComponent as Shape13 } from "./../shapes/13-triangle-frame-even.svg";
+import { ReactComponent as Shape14 } from "./../shapes/14-triangle-frame-odd.svg";
+import { ReactComponent as Shape15 } from "./../shapes/15-circle.svg";
 
-import { ReactComponent as Shape16 } from './../shapes/16-half-circle.svg';
-import { ReactComponent as Shape17 } from './../shapes/17-half-pushed-circle.svg';
-import { ReactComponent as Shape18 } from './../shapes/18-pushed-circle.svg';
-import { ReactComponent as Shape19 } from './../shapes/19-circle-frame.svg';
-import { ReactComponent as Shape20 } from './../shapes/20-half-circle-frame.svg';
+import { ReactComponent as Shape16 } from "./../shapes/16-half-circle.svg";
+import { ReactComponent as Shape17 } from "./../shapes/17-half-pushed-circle.svg";
+import { ReactComponent as Shape18 } from "./../shapes/18-pushed-circle.svg";
+import { ReactComponent as Shape19 } from "./../shapes/19-circle-frame.svg";
+import { ReactComponent as Shape20 } from "./../shapes/20-half-circle-frame.svg";
 
-import { ReactComponent as Shape21 } from './../shapes/21-star-4.svg';
-import { ReactComponent as Shape22 } from './../shapes/22-star-5.svg';
-import { ReactComponent as Shape23 } from './../shapes/23-star-12.svg';
-import { ReactComponent as Shape24 } from './../shapes/24-star-24a.svg';
-import { ReactComponent as Shape25 } from './../shapes/25-star-24b.svg';
+import { ReactComponent as Shape21 } from "./../shapes/21-star-4.svg";
+import { ReactComponent as Shape22 } from "./../shapes/22-star-5.svg";
+import { ReactComponent as Shape23 } from "./../shapes/23-star-12.svg";
+import { ReactComponent as Shape24 } from "./../shapes/24-star-24a.svg";
+import { ReactComponent as Shape25 } from "./../shapes/25-star-24b.svg";
 
-import { ReactComponent as Shape26 } from './../shapes/26-arrow.svg';
-import { ReactComponent as Shape27 } from './../shapes/27-arrow-2-way.svg';
-import { ReactComponent as Shape28 } from './../shapes/28-arrow-2-way-turn.svg';
-import { ReactComponent as Shape29 } from './../shapes/29-arrow-3-way.svg';
-import { ReactComponent as Shape30 } from './../shapes/30-arrow-4-way.svg';
+import { ReactComponent as Shape26 } from "./../shapes/26-arrow.svg";
+import { ReactComponent as Shape27 } from "./../shapes/27-arrow-2-way.svg";
+import { ReactComponent as Shape28 } from "./../shapes/28-arrow-2-way-turn.svg";
+import { ReactComponent as Shape29 } from "./../shapes/29-arrow-3-way.svg";
+import { ReactComponent as Shape30 } from "./../shapes/30-arrow-4-way.svg";
 
-import { ReactComponent as Shape31 } from './../shapes/31-arrow-turn.svg';
-import { ReactComponent as Shape32 } from './../shapes/32-arrow-turn-full.svg';
-import { ReactComponent as Shape33 } from './../shapes/33-chat-rect.svg';
-import { ReactComponent as Shape34 } from './../shapes/34-chat-circle.svg';
-import { ReactComponent as Shape35 } from './../shapes/35-chat-thought.svg';
+import { ReactComponent as Shape31 } from "./../shapes/31-arrow-turn.svg";
+import { ReactComponent as Shape32 } from "./../shapes/32-arrow-turn-full.svg";
+import { ReactComponent as Shape33 } from "./../shapes/33-chat-rect.svg";
+import { ReactComponent as Shape34 } from "./../shapes/34-chat-circle.svg";
+import { ReactComponent as Shape35 } from "./../shapes/35-chat-thought.svg";
 
-
-
-const Shapes = ({ canvas }) => {
-
+const Shapes = ({ canvas, setZoom }) => {
   const handleShapeAdd = (e) => {
-    console.log(e.currentTarget)
-    fabric.loadSVGFromString(
-      e.currentTarget.children[0].outerHTML,
+    canvas.setZoom(1);
+    setZoom(1);
+    canvas.remove(...canvas.getObjects());
+    fabric.loadSVGFromURL(
+      e.currentTarget.children[0].src,
       (objects, options) => {
-        var obj = fabric.util.groupSVGElements(objects, options)
-        obj.strokeUniform = true
-        obj.strokeLineJoin = 'miter'
-        obj.scaleToWidth(200)
-        obj.scaleToHeight(200)
-        obj.set({ left: canvas.getWidth()/2 - 100, top: canvas.getHeight()/2 - 100 })
-        canvas.add(obj).renderAll()
-        canvas.trigger('object:modified')
-      }
-    )
-  }
+        console.log(objects);
+        var svg = fabric.util.groupSVGElements(objects, options);
 
+        // Lấy kích thước của canvas
+        const canvasWidth = svg.width;
+        const canvasHeight = svg.height;
+
+        // Áp dụng tỷ lệ scale cho SVG
+        canvas.setDimensions({
+          width: canvasWidth,
+          height: canvasHeight,
+        });
+
+        objects.forEach((element, index) => {
+          canvas.add(element);
+        });
+        canvas.renderAll();
+        canvas.trigger('object:modified');
+        // Thêm SVG vào canvas
+      }
+    );
+  };
 
   return (
     <>
-      <p className="title">{__('SHAPES')}</p>
+      <p className="title">{__("TEMPLATES")}</p>
 
       <div className="shapes">
-        <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape01 /></div>
-        <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape02 /></div>
-        <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape03 /></div>
-        <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape04 /></div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/t001.svg"
+            style={{ height: 100 }}
+          />
+        </div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/t002.svg"
+            style={{ height: 100 }}
+          />
+        </div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/t003.svg"
+            style={{ height: 100 }}
+          />
+        </div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/t004.svg"
+            style={{ height: 100 }}
+          />
+        </div>
+        {/* <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape04 /></div>
         <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape05 /></div>
 
         <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape06 /></div>
@@ -114,12 +144,36 @@ const Shapes = ({ canvas }) => {
         <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape32 /></div>
         <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape33 /></div>
         <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape34 /></div>
-        <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape35 /></div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}><Shape35 /></div> */}
+      </div>
+      <div className="shapes-horizon">
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/n001.svg"
+            style={{ height: 70 }}
+          />
+        </div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/n002.svg"
+            style={{ height: 70 }}
+          />
+        </div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/n003.svg"
+            style={{ height: 70 }}
+          />
+        </div>
+        <div className="button" onClick={(e) => handleShapeAdd(e)}>
+          <img
+            src="https://kiosk.riansoft.net/admin/svg_editor/templates/n004.svg"
+            style={{ height: 70 }}
+          />
+        </div>
       </div>
     </>
-  )
+  );
+};
 
-}
-
-export default Shapes
-
+export default Shapes;

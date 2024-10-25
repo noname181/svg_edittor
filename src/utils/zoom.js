@@ -11,8 +11,14 @@ export const zoomOptions = [0.05, 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3]
 // apply zoom on canvas
 export const applyZoom = (canvas, zoom) => {
   canvas.setZoom(zoom)
-  canvas.setWidth(canvas.originalW * canvas.getZoom())
-  canvas.setHeight(canvas.originalH * canvas.getZoom())
+  if(canvas.width < canvas.height) {
+    canvas.setWidth(canvas.originalW * canvas.getZoom())
+    canvas.setHeight(canvas.originalH * canvas.getZoom())
+  }else {
+    canvas.setWidth(canvas.originalH * canvas.getZoom())
+    canvas.setHeight(canvas.originalW * canvas.getZoom())
+  }
+
   canvas.renderAll()
 
   // center the scrollbars

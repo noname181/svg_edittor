@@ -17,10 +17,8 @@ const FabricCanvas = (props) => {
     if (props.canvas) return;
 
     // create instance
-    let width =
-      document.getElementsByClassName("canvas-holder")[0].offsetWidth - 17;
-    let height =
-      document.getElementsByClassName("canvas-holder")[0].offsetHeight - 8;
+    let width = 255;
+    let height = 370;
     const fabricCanvas = new fabric.Canvas("c").setDimensions({
       width: width,
       height: height,
